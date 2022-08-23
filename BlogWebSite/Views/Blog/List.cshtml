@@ -1,0 +1,40 @@
+﻿@using BlogWebSite.Models.ViewModels
+@{
+    ViewData["Title"] = "Index";
+}
+@model List<Blog>
+<a asp-controller="Manage" asp-action="Create" class="btn btn-primary">Ürün Ekle</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Content</th>   
+            <th>IsPublish</th>
+            <th>Poster</th>
+            <th>Category</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+      
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Title</td>
+                <td>@item.Content</td>
+                <td>@item.IsPublish</td> 
+                <td><img src="/pictures/@item.Poster"/></td>           
+                <td>
+                    <input class="form-check-input" type="checkbox" disabled @(item.IsPublish ? "checked" : "")>
+                </td>
+                <td>@item.Category.Name</td>
+                <td>
+                    <a asp-controller="Manage" asp-action="Update" asp-route-id="@item.Id" >Güncelle</a>
+                    <a asp-controller="Manage" asp-action="Delete" asp-route-id="@item.Id">Sil</a>    
+                </td>
+            </tr>  
+        }
+    </tbody>
+</table>

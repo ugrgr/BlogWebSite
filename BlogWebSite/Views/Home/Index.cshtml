@@ -1,0 +1,29 @@
+﻿@using BlogWebSite.Models.ViewModels
+@model X.PagedList.IPagedList<BlogWebSite.Models.Blog>
+@using X.PagedList.Mvc.Core;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-4">
+            <div class="card">
+                <img src="/pictures/@item.Poster" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Title</h5>
+                    <p class="card-text">@(item.Content.Length > 80 ? item.Content.Substring(0, 80)+"..." : item.Content)</p>
+                    <a asp-controller="Blog" asp-action="Update" asp-route-id="@item.Id" class="btn btn-primary">Daha Fazlası</a>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index",
+new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

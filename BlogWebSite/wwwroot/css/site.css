@@ -1,0 +1,35 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.pagination-container{
+    display:flex;
+    justify-content:center;
+
+}
+
+.pagination li{
+background-color:#333;
+color:#fff;
+padding:5px;
+margin-right:5px;
+border-radius:3px;
+}
+.pagination li.active{
+    background-color:#0094ff;
+}

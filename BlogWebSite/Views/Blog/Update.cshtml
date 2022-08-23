@@ -1,0 +1,45 @@
+﻿@using BlogWebSite.Models.ViewModels
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model BlogUpdateViewModel
+
+<form asp-controller="Blog" asp-action="Update" method="post">
+    <select class="form-select" asp-items="@ViewBag.selectList" asp-for="CategoryId">
+    </select>
+
+    <input type="hidden" asp-for="Id" />
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Başlık:</label>
+        <input class="form-control" asp-for="Title">
+        <span class="text-danger" asp-validation-for="Title"></span>
+
+    </div>
+    <div class="mb-3">
+        <label asp-for="Content" class="form-label">İçerik :</label>
+        <textarea class="form-control" asp-for="Content"></textarea>
+        <span class="text-danger" asp-validation-for="Content"></span>
+    </div>
+
+     <div class="mb-3">
+        <label asp-for="photo" class="form-label">Poster :</label>
+        <input class="form-control" name="photo" asp-for="photo" type="file">
+    </div>
+
+
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" asp-for="IsPublish">
+        <label class="form-check-label" asp-for="IsPublish">
+            Yayınlansın mı ?
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ürün Güncelle</button>
+
+</form>
+<br />
+<br /> 
+<form asp-controller="Blog" asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+</form>
