@@ -103,7 +103,7 @@ namespace BlogWebSite.Controllers
                 return RedirectToAction("Index", "Home");
 
             }
-            return RedirectToAction($"Update/{id}","Blog") ;
+            return RedirectToAction("Index","Home") ;
             
         }
 
