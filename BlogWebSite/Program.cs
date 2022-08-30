@@ -1,29 +1,33 @@
 
+using BlogWebSite.Services;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.Extensions.Hosting;
+using System;
 using System.Reflection;
-using BlogWebSite.Filters;
-using BlogWebSite.Models;
-using BlogWebSite.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddScoped<IBlogRepository, BlogRepository>();
+//builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 
-builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+//builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
-builder.Services.AddScoped<NotFoundFilter>();
+//builder.Services.AddScoped<NotFoundFilter>();
 
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+
+//builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
+
+builder.Services.AddHttpClient<IBlogService, BlogService>(options =>
 {
-    options.UseSqlServer(builder.Configuration["DatabaseSqlCon"]);
-
+    options.BaseAddress = new Uri(builder.Configuration["WebApi:BaseUrl"]);
 });
-builder.Services.AddSingleton<IFileProvider>(new PhysicalFileProvider(Directory.GetCurrentDirectory()));
+
 var app = builder.Build();
 
 

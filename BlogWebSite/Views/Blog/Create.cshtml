@@ -1,4 +1,4 @@
-﻿@using BlogWebSite.Models.ViewModels
+﻿
 @{
     ViewData["Title"] = "Blog";
 }
@@ -21,13 +21,13 @@
 
     <div class="mb-3">
         <label asp-for="Content" class="form-label">İçerik :</label>
-        <textarea class="form-control" asp-for="Content"></textarea>
+        <textarea class="form-control" asp-for="Content" rows="15"></textarea>
         <span class="text-danger" asp-validation-for="Content"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="photo" class="form-label">Poster :</label>
-        <input class="form-control" name="photo" asp-for="photo" type="file">
+        <label asp-for="Poster" class="form-label">Poster :</label>
+        <input class="form-control" name="Poster" asp-for="Poster" type="file" enctype="multipart/form-data">
     </div>
 
     <div class="form-check">

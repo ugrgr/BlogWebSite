@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BlogWebSite.Core.DTOs;
+using BlogWebSite.Core.Models;
+using BlogWebSite.Repositories;
 using System.Linq.Expressions;
-using BlogWebSite.Models;
 
-namespace BlogWebSite.Repositories
+namespace BlogWebSite.Repository
 {
+
     public class BlogRepository : IBlogRepository
     {
         private readonly AppDbContext _context;
@@ -17,39 +19,33 @@ namespace BlogWebSite.Repositories
         {
             return _context.Categories.ToList();
         }
-      
+        
         public Blog Create(Blog blog)
         {
             _context.Blogs.Add(blog);
-            _context.SaveChanges();
             return blog;
-            
-                
         }
 
         public void Delete(int id)
         {
-
-
             var blog = _context.Blogs.Find(id);
             _context.Blogs.Remove(blog);
-            _context.SaveChanges();
         }
 
         public List<Blog> GetAll()
         {
-            return _context.Blogs.Include(x => x.Category).ToList();
+            return _context.Blogs.ToList();
         }
 
         public Blog? GetById(int id)
         {
-            return _context.Blogs.Find(id);
+            var blog = _context.Blogs.Find(id);
+            return blog;
         }
 
         public void Update(Blog blog)
         {
             _context.Update(blog);
-            _context.SaveChanges();
         }
 
         public bool Any(Expression<Func<Blog, bool>> predicate)
@@ -57,5 +53,6 @@ namespace BlogWebSite.Repositories
 
             return _context.Blogs.Any(predicate);
         }
+
     }
 }

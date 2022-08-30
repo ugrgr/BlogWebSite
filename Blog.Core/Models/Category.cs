@@ -1,5 +1,5 @@
 ﻿
-namespace BlogWebSite.Models
+namespace BlogWebSite.Core.Models
 {
     public class Category
     {

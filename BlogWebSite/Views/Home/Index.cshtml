@@ -1,16 +1,15 @@
-﻿@using BlogWebSite.Models.ViewModels
-@model X.PagedList.IPagedList<BlogWebSite.Models.Blog>
+﻿@model X.PagedList.IPagedList<BlogWebSite.Models.BlogViewModel>
 @using X.PagedList.Mvc.Core;
-
 @{
     ViewData["Title"] = "Home Page";
 }
 <div class="row">
     @foreach (var item in Model)
     {
-        <div class="col-4">
+        <div class="col-4 mb-4">
             <div class="card">
-                <img src="/pictures/@item.Poster" class="card-img-top" alt="...">
+                <img class="card-img-top img-fluid" alt="..." src="data:image/png;base64, @item.Poster" style="height:250px">
+
                 <div class="card-body">
                     <h5 class="card-title">@item.Title</h5>
                     <p class="card-text">@(item.Content.Length > 80 ? item.Content.Substring(0, 80)+"..." : item.Content)</p>
@@ -19,11 +18,9 @@
             </div>
         </div>
     }
-
-
 </div>
 
 <br />
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
 @Html.PagedListPager(Model, page => Url.Action("Index",
 new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

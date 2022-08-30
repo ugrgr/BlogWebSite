@@ -1,7 +1,6 @@
-﻿using BlogWebSite.Models.ViewModels;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace BlogWebSite.Models
+namespace BlogWebSite.Core.Models
 {
     public class Blog
     {
